@@ -5,11 +5,18 @@
  */
 function legalaid_sms_content_form_alter(&$form, &$form_state, $form_id) {
   $message = 'I want to leave my husband';
-  $number = '6308811337';
- 	legalaid_sms_houston_parse($message, $number);
+
+
 
 }
 
+function legalaid_sms_content_title_builder() {
+  $nodes = node_load_multiple(array(1,2,3));
+  $message = t('Which article would you like?');
+  foreach ($nodes as $node) {
+    $message .= " /n " .'' $node->title;
+  }
+}
 
 function legalaid_sms_strip_html($text) {
   $text = str_replace('[no-lexicon]','', $text);
@@ -41,4 +48,26 @@ function legalaid_sms_prepare_content($node) {
    // twilio_send(6308811337,$message);
   }
   return $message;
+}
+
+
+
+function legalaid_sms_content_find_match_on_taxonomy($code) {
+  $term = taxonomy_get_term_by_name($code->label);
+  $tid = $term->tid;
+  $query = new entityFieldQuery();
+  $query->entityCondition('entity_type','node')
+    ->propertyCondition('status',NODE_PUBLISHED)
+    ->propertyCondition('type','sms_info')
+    ->fieldCondition('field_sms_tags','tid',$tid,'=')
+    ->addMetaData('account', user_load(1));
+
+  $result = $query->execute();
+  if (isset($result['node'])) {
+    $matching_items_nids = array_keys($result['node']);
+    $matching_items = entity_load('node', $matching_items_nids);
+    return $matching_items;
+  }
+  return null;
+
 }
