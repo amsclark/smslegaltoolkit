@@ -14,7 +14,8 @@ function legalaid_sms_twilio_sms_incoming($sms, $options) {
   $message = strtolower($sms['message']);
   watchdog('SMS','An sms was received from @num',array('@num' => $number),WATCHDOG_NOTICE);
 
-  $exact_match = legalaid_sms_find_match($message);
+  //$exact_match = legalaid_sms_find_match($message);
+  $exact_match = "";
   if (!empty($exact_match)) {
     watchdog('SMS','We found a match',array(),WATCHDOG_NOTICE);
 
