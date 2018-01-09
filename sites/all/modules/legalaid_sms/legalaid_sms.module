@@ -14,12 +14,13 @@ function legalaid_sms_twilio_sms_incoming($number, $number_twilio, $message) {
   $message = strtolower($message);
   $exact_match = legalaid_sms_find_match($message);
   if (!empty($exact_match)) {
+    watchdog('SMS','We found a match',array(),WATCHDOG_NOTICE);
+
     twilio_send($number, 'We found a match');
   }
   else {
-    if (module_exists('houston_ai')) {
-      $problem = houston_ai_classify('',$message,'');
-    }
+    watchdog('SMS','No match',array(),WATCHDOG_NOTICE);
+
     twilio_send($number, 'We did not find a match');
   }
 
