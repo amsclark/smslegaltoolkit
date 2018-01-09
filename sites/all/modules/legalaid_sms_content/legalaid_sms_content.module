@@ -5,7 +5,9 @@
  */
 function legalaid_sms_content_form_alter(&$form, &$form_state, $form_id) {
   $message = 'I want to leave my husband';
-  	$houston_output = houston_ai_classify(null, $message, null);
+  $code = stdClass();
+  $code->label = 'Eviction';
+  legalaid_sms_content_find_match_on_taxonomy($code);
 
 
 
@@ -58,6 +60,7 @@ function legalaid_sms_content_prepare_content($node) {
 
 function legalaid_sms_content_find_match_on_taxonomy($code) {
   $term = taxonomy_get_term_by_name($code->label);
+  dpm($term);
   $tid = $term->tid;
   $query = new entityFieldQuery();
   $query->entityCondition('entity_type','node')
