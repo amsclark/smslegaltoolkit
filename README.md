@@ -14,7 +14,7 @@ Libraries 7.x-2.3
 
 Features 7.x-2.10
 
-* Other Requirements: *
+*Other Requirements:*
 
 You will need a Twilio API Key. https://www.twilio.com/try-twilio
 
