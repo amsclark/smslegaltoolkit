@@ -22,21 +22,36 @@ function legalaid_sms_twilio_sms_incoming($sms, $options) {
   }
   else {
     watchdog('SMS','No match',array(),WATCHDOG_NOTICE);
-    twilio_send($number, 'We did not find a match');
-	legalaid_sms_houston_parse($message, $number);
-  }
-
-}
-
-function legalaid_sms_houston_parse($message, $number) {
-	$houston_output = houston_ai_classify(null, $message, null);
+	$houston_output = houston_ai_classify(null, $message, null)
 	$code = $houston_output->code;
-	$label = $code->label;
-	dpm($houston_output);
 	$probability = (int) 100 * $houston_output->probability;
-	watchdog('SMS','Houston classification returned @label with a @prob likelihood',array('@label' => $label, '@prob' => $probability),WATCHDOG_NOTICE);
-	twilio_send($number, "You seem to be having a problem with {$label}, {$probability} likelihood.");
+	if($probability >= 75){
+		$nodes = legalaid_sms_content_find_match_on_taxonomy($code);
+ 		if(count($nodes) == 1){
+			$message = legalaid_sms_content_prepare_content(current($nodes));
+		}
+		else {
+			legalaid_sms_create_titles($nodes);
+		}
+	}
+	else {
+		$message = "";
+	}
+	twilio_send($number, $message);
+  }
 }
+
+
+
+#function legalaid_sms_houston_parse($message, $number) {
+#	$houston_output = houston_ai_classify(null, $message, null);
+#	$code = $houston_output->code;
+#	$label = $code->label;
+#	dpm($houston_output);
+#	$probability = (int) 100 * $houston_output->probability;
+#	watchdog('SMS','Houston classification returned @label with a @prob likelihood',array('@label' => $label, '@prob' => $probability),WATCHDOG_NOTICE);
+#	twilio_send($number, "You seem to be having a problem with {$label}, {$probability} likelihood.");
+#}
 
 function legalaid_sms_find_match($message) {
   $query = new entityFieldQuery();
