@@ -30,7 +30,7 @@ function legalaid_sms_find_match($message) {
   $query = new entityFieldQuery();
   $query->entityCondition('entity_type','node')
     ->property_condition('status',NODE_PUBLISHED)
-    ->property_condition('type','sms_info'),
+    ->property_condition('type','sms_info')
   ->field_condition('field_keyword','value',$message,'=')
     ->addMetaData('account', user_load(1));
 
