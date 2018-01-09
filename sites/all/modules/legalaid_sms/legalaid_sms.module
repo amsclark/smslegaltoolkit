@@ -12,13 +12,13 @@ function legalaid_sms_twilio_sms_incoming($sms, $options) {
   $number = $sms['number'];
   $number_twilio = $sms['number_twilio'];
   $message = strtolower($sms['message']);
+  $response = "";
   watchdog('SMS','An sms was received from @num',array('@num' => $number),WATCHDOG_NOTICE);
 
   $exact_match = legalaid_sms_find_match($message);
   if (!empty($exact_match)) {
     watchdog('SMS','We found a match',array(),WATCHDOG_NOTICE);
-
-    twilio_send($number, 'We found a match');
+	$response = legalaid_sms_content_prepare_content($exact_match);
   }
   else {
     watchdog('SMS','No match',array(),WATCHDOG_NOTICE);
@@ -28,22 +28,25 @@ function legalaid_sms_twilio_sms_incoming($sms, $options) {
 	if($probability >= 75){
 		$nodes = legalaid_sms_content_find_match_on_taxonomy($code);
  		if(count($nodes) == 1){
-			$message = legalaid_sms_content_prepare_content(current($nodes));
+			$response = legalaid_sms_content_prepare_content(current($nodes));
 		}
 		else {
-			$message = legalaid_sms_create_titles($nodes);
+			$response = legalaid_sms_content_create_titles($nodes);
 		}
 	}
 	else {
-		$message = "Select which option you need help with : \n";
-		$message .= "1) " . $code->label;
+		$response = "Select which option you need help with : \n";
+		$response .= "1) " . $code->label;
 		foreach ($houston_output->otherProbabilities as $index => $code) {
-			$message .= " /n ". index + 2 .") ". $code->code;
+			$response .= " /n ". index + 2 .") ". $code->code;
 		}
-		$message .= "\n or reply \"Something else\" for more options.";
+		$response .= "\n or reply \"Something else\" for more options.";
 	}
-	twilio_send($number, $message);
+	if(empty($response)){
+		$response = "We're not sure how to help you. \n Call 1-800-123-4567 for additional assistance.";
+	}
   }
+  twilio_send($number, $response);
 }
 
 
