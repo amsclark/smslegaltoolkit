@@ -22,7 +22,7 @@ function legalaid_sms_twilio_sms_incoming($sms, $options) {
   }
   else {
     watchdog('SMS','No match',array(),WATCHDOG_NOTICE);
-	$houston_output = houston_ai_classify(null, $message, null)
+	$houston_output = houston_ai_classify(null, $message, null);
 	$code = $houston_output->code;
 	$probability = (int) 100 * $houston_output->probability;
 	if($probability >= 75){
