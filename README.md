@@ -9,5 +9,5 @@ A Drupal 7 server up and running
 *Required Modules:*
 
 Twilio 7.x-1.11
-
+Libraries 7.x-2.3
 
