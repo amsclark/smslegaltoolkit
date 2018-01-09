@@ -14,7 +14,6 @@ function legalaid_sms_twilio_sms_incoming($sms, $options) {
   $message = strtolower($sms['message']);
   if (module_exists('houston_ai')) {
     $problem = houston_ai_classify('',$message);
-    dpm($problem);
   }
   twilio_send('6308811337','Hello');
   // need to get problem code
