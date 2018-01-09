@@ -143,7 +143,7 @@ function twilio_send($number, $message, $country = TWILIO_DEFAULT_COUNTRY_CODE, 
   switch (variable_get('twilio_long_sms', TWILIO_SMS_LONG_MULTIPLE)) {
     case TWILIO_SMS_LONG_TRUNCATE:
       // Truncate the message to 160 characters.
-      $message_truncated = substr($message, 0, 160);
+      $message_truncated = substr($message, 0, 1500);
       $response = twilio_command('sendmsg', array(
         'country' => $country,
         'number' => $number,
@@ -154,13 +154,18 @@ function twilio_send($number, $message, $country = TWILIO_DEFAULT_COUNTRY_CODE, 
       break;
 
     case TWILIO_SMS_LONG_MULTIPLE:
-      // Break up the message into 160 character chunks and send multiple.
-      $iterator = ceil(strlen($message) / 160);
+      $iterator = ceil(strlen($message) / 1500);
       for ($i = 0; $i < $iterator; $i++) {
+        if ($iterator == 1) {
+          $ctr = "";
+        }
+        else {
+          $ctr = $i+1 .'/' .$iterator;
+        }
         $sms = array(
           'country' => $country,
           'number' => $number,
-          'message' => substr($message, $i * 160, 160),
+          'message' => $ctr .' ' .substr($message, $i * 1500, 1500),
           'options' => $options,
         );
         // Attach the media array only to the first message.

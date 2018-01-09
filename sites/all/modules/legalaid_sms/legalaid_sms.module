@@ -62,3 +62,4 @@ return null;
 function legalaid_sms_form_alter(&$form, &$form_state, $form_id) {
 
 }
+
