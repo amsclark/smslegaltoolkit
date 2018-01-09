@@ -12,22 +12,36 @@ function legalaid_sms_twilio_sms_incoming($sms, $options = NULL) {
   $number = $sms['number'];
   $number_twilio = $sms['number_twilio'];
   $message = strtolower($sms['message']);
-  if (module_exists('houston_ai')) {
-    $problem = houston_ai_classify('',$message,'');
+  $exact_match = legalaid_sms_find_match($message);
+  if (!empty($exact_match)) {
+    twilio_send($number, 'We found a match');
   }
-  $response = $message .' received';
- // twilio_send('6308811337', $response);
-  // need to get problem code
-  // need to formulate the result
-  // need to respond to user
+  else {
+    if (module_exists('houston_ai')) {
+      $problem = houston_ai_classify('',$message,'');
+    }
+    twilio_send($number, 'We did not find a match');
+  }
+
 }
 
-/**
- * Implements hook_form_alter().
- */
-function legalaid_sms_form_alter(&$form, &$form_state, $form_id) {
-  $sms['number'] = 6308811337;
-  $sms['number_twilio'] = 6308811337;
-  $sms['message'] = 'I do not want to be married anymore';
- // legalaid_sms_twilio_sms_incoming($sms);
+
+function legalaid_sms_find_match($message) {
+  $query = new entityFieldQuery();
+  $query->entityCondition('entity_type','node')
+    ->property_condition('status',NODE_PUBLISHED)
+    ->property_condition('type','sms_info'),
+  ->field_condition('field_keyword','value',$message,'=')
+    ->addMetaData('account', user_load(1));
+
+$result = $query->execute();
+if (isset($result['node'])) {
+  $matching_items_nids = array_keys($result['node']);
+  $matching_items = entity_load('node', $matching_items_nids);
+  return $matching_items;
+}
+return null;
+
+
+
 }
