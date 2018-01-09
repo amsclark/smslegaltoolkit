@@ -19,7 +19,7 @@ function legalaid_sms_content_create_titles($nodes) {
   $message = t('Which article would you like?');
   $ctr = 1;
   foreach ($nodes as $node) {
-    $message .= " /n " .'Reply ' .$ctr .' for ' .$node->title;
+    $message .= " \n " .'Reply ' .$ctr .' for ' .$node->title;
     $ctr++;
   }
   return $message;
