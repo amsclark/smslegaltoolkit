@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="775bdc2f-b72a-4c3f-aa58-59f97da59fd1" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/modules/legalaid_sms/legalaid_sms.module" afterPath="$PROJECT_DIR$/sites/all/modules/legalaid_sms/legalaid_sms.module" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/modules/legalaid_sms_content/legalaid_sms_content.module" afterPath="$PROJECT_DIR$/sites/all/modules/legalaid_sms_content/legalaid_sms_content.module" />
     </list>
     <ignored path="hackathon-sms.iws" />
@@ -26,11 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="legalaid_sms.module" pinned="false" current-in-tab="false">
+      <file leaf-file-name="legalaid_sms.module" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sites/all/modules/legalaid_sms/legalaid_sms.module">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="18" column="5" selection-start-line="18" selection-start-column="3" selection-end-line="19" selection-end-column="0" />
+            <state relative-caret-position="360">
+              <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -56,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="legalaid_sms_content.module" pinned="false" current-in-tab="true">
+      <file leaf-file-name="legalaid_sms_content.module" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sites/all/modules/legalaid_sms_content/legalaid_sms_content.module">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="47" column="5" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
+            <state relative-caret-position="120">
+              <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -107,8 +109,8 @@
         <option value="$PROJECT_DIR$/sites/all/modules/site_features/site_features.install" />
         <option value="$PROJECT_DIR$/sites/all/modules/legalaid_sms/legalaid_sms.info" />
         <option value="$PROJECT_DIR$/sites/all/modules/legalaid_sms_content/legalaid_sms_content.info" />
-        <option value="$PROJECT_DIR$/sites/all/modules/legalaid_sms/legalaid_sms.module" />
         <option value="$PROJECT_DIR$/sites/all/modules/twilio/twilio.module" />
+        <option value="$PROJECT_DIR$/sites/all/modules/legalaid_sms/legalaid_sms.module" />
         <option value="$PROJECT_DIR$/sites/all/modules/legalaid_sms_content/legalaid_sms_content.module" />
       </list>
     </option>
@@ -121,7 +123,7 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="32" />
+    <option name="x" value="27" />
     <option name="y" value="35" />
     <option name="width" value="1280" />
     <option name="height" value="696" />
@@ -421,7 +423,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1515520193791</updated>
-      <workItem from="1515520195115" duration="8049000" />
+      <workItem from="1515520195115" duration="8759000" />
     </task>
     <task id="LOCAL-00001" summary="Patches twilio module to allow for concatenated SMS correctly.">
       <created>1515528774281</created>
@@ -434,10 +436,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8049000" />
+    <option name="totallyTimeSpent" value="8759000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="32" y="35" width="1280" height="696" extended-state="0" />
+    <frame x="27" y="35" width="1280" height="696" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -504,14 +506,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sites/all/modules/legalaid_sms/legalaid_sms.module">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="18" column="5" selection-start-line="18" selection-start-column="3" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sites/all/modules/twilio/twilio.module">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="62">
@@ -538,8 +532,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sites/all/modules/legalaid_sms_content/legalaid_sms_content.module">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="47" column="5" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
+        <state relative-caret-position="120">
+          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sites/all/modules/legalaid_sms/legalaid_sms.module">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
           <folding />
         </state>
       </provider>

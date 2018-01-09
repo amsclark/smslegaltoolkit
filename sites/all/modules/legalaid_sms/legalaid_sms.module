@@ -32,6 +32,7 @@ function legalaid_sms_houston_parse($message, $number) {
 	$houston_output = houston_ai_classify(null, $message, null);
 	$code = $houston_output->code;
 	$probability = $houston_output->probability;
+  dpm($houston_output);
 	watchdog('SMS','Houston classification returned @code with a @prob likelihood',array('@code' => $code, '@prob' => probability),WATCHDOG_NOTICE);
 	twilio_send($number, "You seem to be having a problem with {@code}, {@probability}$ likelihood.");
 }
