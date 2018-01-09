@@ -16,7 +16,7 @@ function legalaid_sms_twilio_sms_incoming($sms, $options = NULL) {
     $problem = houston_ai_classify('',$message,'');
   }
   $response = $message .' received';
-  twilio_send('6308811337',);
+  twilio_send('6308811337', $resonse);
   // need to get problem code
   // need to formulate the result
   // need to respond to user
