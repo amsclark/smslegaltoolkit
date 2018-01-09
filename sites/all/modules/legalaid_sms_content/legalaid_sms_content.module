@@ -4,17 +4,10 @@
  * Implements hook_form_alter().
  */
 function legalaid_sms_content_form_alter(&$form, &$form_state, $form_id) {
-  $message = 'court tips';
-  $exact_match = legalaid_sms_find_match($message);
-  dpm($exact_match);
-  watchdog('SMS','We found a match @count',array('@count' => count($exact_match)),WATCHDOG_NOTICE);
-  if (count($exact_match) == 1) {
-    $message = legalaid_sms_prepare_content(current($exact_match));
-    dpm($message);
-  }
-  else {
-    //send something else
-  }
+  $message = 'I want to leave my husband';
+  $number = '6308811337';
+ 	legalaid_sms_houston_parse($message, $number);
+
 }
 
 
@@ -30,7 +23,7 @@ function legalaid_sms_strip_html($text) {
   $text = str_replace('<h4>'," \n ",$text);
   $text = str_replace('<h5>'," \n ",$text);
   $text = str_replace('&nbsp;'," ",$text);
-  $text = str_replace('<li>'," \n*",$text);
+  $text = str_replace('<li>'," \n \n*",$text);
   $text = str_replace('<ul>'," \n",$text);
   $text = decode_entities($text);
 
