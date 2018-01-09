@@ -56,25 +56,3 @@ function legalaid_sms_form_alter(&$form, &$form_state, $form_id) {
 
 }
 
-
-function legalaid_sms_strip_html($text) {
-    $text = str_replace('[no-lexicon]','', $text);
-    $text = str_replace('[/no-lexicon]','', $text);
-    $text = str_replace('<a href="/node',' http://dev-hackathon-sms.pantheonsite.io/node',$text);
-    $text = str_replace('<a href="es/node',' http://dev-hackathon-sms.pantheonsite.io/es/node',$text);
-    $text = str_replace('<a href="',' ',$text);
-    $text = str_replace('">',' ',$text);
-    $text = str_replace('<p>'," \n ",$text);
-    $text = str_replace('<h3>'," \n ",$text);
-    $text = str_replace('<h4>'," \n ",$text);
-    $text = str_replace('<h5>'," \n ",$text);
-    $text = str_replace('&nbsp;'," ",$text);
-    $text = str_replace('<li>'," \n*",$text);
-    $text = str_replace('<ul>'," \n",$text);
-    $text = decode_entities($text);
-
-
-    $text = strip_tags($text);
-    return $text;
-  }
-}
