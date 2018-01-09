@@ -7,7 +7,10 @@ function legalaid_sms_content_form_alter(&$form, &$form_state, $form_id) {
   $message = 'I want to leave my husband';
   $code['label'] = 'Private Landlord/Tenant';
   $code_new = (object) $code;
-  legalaid_sms_content_find_match_on_taxonomy($code_new);
+  $nodes = legalaid_sms_content_find_match_on_taxonomy($code_new);
+  dpm($nodes);
+  $msg = legalaid_sms_content_create_titles($nodes);
+  dpm($msg);
 
 
 
@@ -59,22 +62,22 @@ function legalaid_sms_content_prepare_content($node) {
 
 
 function legalaid_sms_content_find_match_on_taxonomy($code) {
-  dpm($code);
   $term = taxonomy_get_term_by_name($code->label);
-  dpm($term);
-  $tid = current($term)->tid;
-  $query = new entityFieldQuery();
-  $query->entityCondition('entity_type','node')
-    ->propertyCondition('status',NODE_PUBLISHED)
-    ->propertyCondition('type','sms_info')
-    ->fieldCondition('field_sms_tags','tid',$tid,'=')
-    ->addMetaData('account', user_load(1));
+  if (!empty($term)) {
+    $tid = current($term)->tid;
+    $query = new entityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->propertyCondition('type', 'sms_info')
+      ->fieldCondition('field_sms_tags', 'tid', $tid, '=')
+      ->addMetaData('account', user_load(1));
 
-  $result = $query->execute();
-  if (isset($result['node'])) {
-    $matching_items_nids = array_keys($result['node']);
-    $matching_items = entity_load('node', $matching_items_nids);
-    return $matching_items;
+    $result = $query->execute();
+    if (isset($result['node'])) {
+      $matching_items_nids = array_keys($result['node']);
+      $matching_items = entity_load('node', $matching_items_nids);
+      return $matching_items;
+    }
   }
   return null;
 
