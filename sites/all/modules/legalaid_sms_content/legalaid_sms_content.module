@@ -8,9 +8,7 @@ function legalaid_sms_content_form_alter(&$form, &$form_state, $form_id) {
   $code['label'] = 'Private Landlord/Tenant';
   $code_new = (object) $code;
   $nodes = legalaid_sms_content_find_match_on_taxonomy($code_new);
-  dpm($nodes);
   $msg = legalaid_sms_content_create_titles($nodes);
-  dpm($msg);
 
 
 
@@ -21,7 +19,7 @@ function legalaid_sms_content_create_titles($nodes) {
   $message = t('Which article would you like?');
   $ctr = 1;
   foreach ($nodes as $node) {
-    $message .= " /n " .'Reply' .$ctr .' for ' .$node->title;
+    $message .= " /n " .'Reply ' .$ctr .' for ' .$node->title;
     $ctr++;
   }
   return $message;

@@ -37,7 +37,7 @@ function legalaid_sms_twilio_sms_incoming($sms, $options) {
 	else {
 		$response = "Select which option you need help with : \n";
 		$response .= "1) " . $code->label;
-		foreach ($houston_output->otherProbabilities as index => $code) {
+		foreach ($houston_output->otherProbabilities as $index => $code) {
 			$response .= " /n ". index + 2 .") ". $code->code;
 		}
 		$response .= "\n or reply \"Something else\" for more options.";
