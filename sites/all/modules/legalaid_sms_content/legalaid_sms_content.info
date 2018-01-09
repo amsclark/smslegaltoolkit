@@ -1,0 +1,6 @@
+name = Legal Aid content SMS
+description = Prepares and sends nodes as SMS
+core = 7.x
+package = Legal aid
+dependencies[] = twilio
+dependencies[] = legalaid_sms
