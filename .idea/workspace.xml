@@ -29,9 +29,11 @@
       <file leaf-file-name="legalaid_sms.module" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sites/all/modules/legalaid_sms/legalaid_sms.module">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="404">
-              <caret line="40" column="63" selection-start-line="40" selection-start-column="63" selection-end-line="40" selection-end-column="63" />
-              <folding />
+            <state relative-caret-position="329">
+              <caret line="40" column="42" selection-start-line="40" selection-start-column="42" selection-end-line="40" selection-end-column="42" />
+              <folding>
+                <marker date="1515536239228" expanded="false" signature="11:40" ph=" Implements hook_form(). ..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -454,7 +456,7 @@
       <option name="presentableId" value="Default" />
       <updated>1515520193791</updated>
       <workItem from="1515520195115" duration="9425000" />
-      <workItem from="1515531062374" duration="4842000" />
+      <workItem from="1515531062374" duration="5148000" />
     </task>
     <task id="LOCAL-00001" summary="Patches twilio module to allow for concatenated SMS correctly.">
       <created>1515528774281</created>
@@ -467,7 +469,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14267000" />
+    <option name="totallyTimeSpent" value="14573000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="3" y="57" width="1280" height="696" extended-state="0" />
@@ -517,7 +519,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
-          <folding />
+          <folding>
+            <marker date="1515536239228" expanded="false" signature="11:40" ph=" Implements hook_form(). ..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -626,9 +630,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sites/all/modules/legalaid_sms/legalaid_sms.module">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="40" column="63" selection-start-line="40" selection-start-column="63" selection-end-line="40" selection-end-column="63" />
-          <folding />
+        <state relative-caret-position="329">
+          <caret line="40" column="42" selection-start-line="40" selection-start-column="42" selection-end-line="40" selection-end-column="42" />
+          <folding>
+            <marker date="1515536239228" expanded="false" signature="11:40" ph=" Implements hook_form(). ..." />
+          </folding>
         </state>
       </provider>
     </entry>
