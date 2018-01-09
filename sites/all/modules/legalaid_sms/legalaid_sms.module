@@ -31,7 +31,7 @@ function legalaid_sms_twilio_sms_incoming($sms, $options) {
 			$message = legalaid_sms_content_prepare_content(current($nodes));
 		}
 		else {
-			legalaid_sms_create_titles($nodes);
+			$message = legalaid_sms_create_titles($nodes);
 		}
 	}
 	else {
