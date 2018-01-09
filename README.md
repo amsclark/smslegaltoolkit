@@ -8,7 +8,7 @@ A Drupal 7 server up and running
 
 *Required Modules:*
 
-Twilio 7.x-1.11
+Twilio 7.x-1.11 (Must be installed using instructions here: https://www.drupal.org/project/twilio)
 
 Libraries 7.x-2.3
 
