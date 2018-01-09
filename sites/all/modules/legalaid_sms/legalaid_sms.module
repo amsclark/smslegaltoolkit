@@ -37,8 +37,8 @@ function legalaid_sms_twilio_sms_incoming($sms, $options) {
 	else {
 		$response = "Select which option you need help with : \n";
 		$response .= "1) " . $code->label;
-		foreach ($houston_output->otherProbabilities as $index => $code) {
-			$response .= " \n ". $index + 2 .") ". $code->code;
+		foreach ($houston_output->otherProbabilities as $index => $prob) {
+			$response .= " \n ". $index + 2 .") ". $prob->code->code;
 		}
 		$response .= "\n or reply \"Something else\" for more options.";
 	}
@@ -46,6 +46,7 @@ function legalaid_sms_twilio_sms_incoming($sms, $options) {
 		$response = "We're not sure how to help you. \n Call 1-800-123-4567 for additional assistance.";
 	}
   }
+  watchdog('SMS','Response is @response',array('@response' => $response),WATCHDOG_NOTICE);
   twilio_send($number, $response);
 }
 
