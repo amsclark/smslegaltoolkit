@@ -7,6 +7,14 @@ function legalaid_sms_content_form_alter(&$form, &$form_state, $form_id) {
   $message = 'court tips';
   $exact_match = legalaid_sms_find_match($message);
   dpm($exact_match);
+  watchdog('SMS','We found a match',array(),WATCHDOG_NOTICE);
+  if (count($exact_match) == 1) {
+    $message = legalaid_sms_prepare_content(current($exact_match));
+    dpm($message);
+  }
+  else {
+    //send something else
+  }
 }
 
 
