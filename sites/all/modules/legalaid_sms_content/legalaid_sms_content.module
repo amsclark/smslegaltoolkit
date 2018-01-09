@@ -5,17 +5,23 @@
  */
 function legalaid_sms_content_form_alter(&$form, &$form_state, $form_id) {
   $message = 'I want to leave my husband';
+  $code['label'] = 'Private Landlord/Tenant';
+  $code_new = (object) $code;
+  legalaid_sms_content_find_match_on_taxonomy($code_new);
 
 
 
 }
 
-function legalaid_sms_content_title_builder() {
-  $nodes = node_load_multiple(array(1,2,3));
+function legalaid_sms_content_create_titles($nodes) {
+
   $message = t('Which article would you like?');
+  $ctr = 1;
   foreach ($nodes as $node) {
-    $message .= " /n " .'' $node->title;
+    $message .= " /n " .'Reply' .$ctr .' for ' .$node->title;
+    $ctr++;
   }
+  return $message;
 }
 
 function legalaid_sms_strip_html($text) {
@@ -39,7 +45,7 @@ function legalaid_sms_strip_html($text) {
   return $text;
 }
 
-function legalaid_sms_prepare_content($node) {
+function legalaid_sms_content_prepare_content($node) {
   $message = $node->title;
   $message .= " \n*";
 
@@ -53,7 +59,9 @@ function legalaid_sms_prepare_content($node) {
 
 
 function legalaid_sms_content_find_match_on_taxonomy($code) {
+  dpm($code);
   $term = taxonomy_get_term_by_name($code->label);
+  dpm($term);
   $tid = $term->tid;
   $query = new entityFieldQuery();
   $query->entityCondition('entity_type','node')
