@@ -59,8 +59,8 @@
       <file leaf-file-name="legalaid_sms_content.module" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sites/all/modules/legalaid_sms_content/legalaid_sms_content.module">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
+            <state relative-caret-position="218">
+              <caret line="64" column="23" selection-start-line="64" selection-start-column="23" selection-end-line="64" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -453,7 +453,7 @@
       <option name="presentableId" value="Default" />
       <updated>1515520193791</updated>
       <workItem from="1515520195115" duration="9425000" />
-      <workItem from="1515531062374" duration="2803000" />
+      <workItem from="1515531062374" duration="2896000" />
     </task>
     <task id="LOCAL-00001" summary="Patches twilio module to allow for concatenated SMS correctly.">
       <created>1515528774281</created>
@@ -466,7 +466,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12228000" />
+    <option name="totallyTimeSpent" value="12321000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="81" width="1280" height="696" extended-state="0" />
@@ -625,8 +625,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sites/all/modules/legalaid_sms_content/legalaid_sms_content.module">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
+        <state relative-caret-position="218">
+          <caret line="64" column="23" selection-start-line="64" selection-start-column="23" selection-end-line="64" selection-end-column="23" />
           <folding />
         </state>
       </provider>
