@@ -1,0 +1,4 @@
+name = Houston AI
+description = API integration with Houston AI
+package = Services
+core = 7.x

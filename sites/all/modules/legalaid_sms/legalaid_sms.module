@@ -1,0 +1,33 @@
+<?php
+
+
+/**
+ * Implements hook_form().
+ */
+
+/**
+ * Implements hook_twilio_sms_incoming().
+ */
+function legalaid_sms_twilio_sms_incoming($sms, $options) {
+  $number = $sms['number'];
+  $number_twilio = $sms['number_twilio'];
+  $message = strtolower($sms['message']);
+  if (module_exists('houston_ai')) {
+    $problem = houston_ai_classify('',$message);
+    dpm($problem);
+  }
+  twilio_send('6308811337','Hello');
+  // need to get problem code
+  // need to formulate the result
+  // need to respond to user
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function legalaid_sms_form_alter(&$form, &$form_state, $form_id) {
+  $sms['number'] = 6308811337;
+  $sms['number_twilio'] = 6308811337;
+  $sms['message'] = 'I do not want to be married anymore';
+  legalaid_sms_twilio_sms_incoming($sms);
+}
