@@ -8,10 +8,12 @@
 /**
  * Implements hook_twilio_sms_incoming().
  */
-function legalaid_sms_twilio_sms_incoming($number, $number_twilio, $message) {
+function legalaid_sms_twilio_sms_incoming($sms, $options) {
+  $number = $sms['number'];
+  $number_twilio = $sms['number_twilio'];
+  $message = strtolower($sms['message']);
   watchdog('SMS','An sms was received from @num',array('@num' => $number),WATCHDOG_NOTICE);
 
-  $message = strtolower($message);
   $exact_match = legalaid_sms_find_match($message);
   if (!empty($exact_match)) {
     watchdog('SMS','We found a match',array(),WATCHDOG_NOTICE);
