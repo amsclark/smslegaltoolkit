@@ -34,7 +34,7 @@ function legalaid_sms_houston_parse($message, $number) {
 	$label = $code->label;
 	dpm($houston_output);
 	$probability = (int) 100 * $houston_output->probability;
-	watchdog('SMS','Houston classification returned @label with a @prob likelihood',array('@label' => $label, '@prob' => probability),WATCHDOG_NOTICE);
+	watchdog('SMS','Houston classification returned @label with a @prob likelihood',array('@label' => $label, '@prob' => $probability),WATCHDOG_NOTICE);
 	twilio_send($number, "You seem to be having a problem with {$label}, {$probability} likelihood.");
 }
 
