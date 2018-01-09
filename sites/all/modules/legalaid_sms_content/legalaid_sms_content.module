@@ -5,9 +5,9 @@
  */
 function legalaid_sms_content_form_alter(&$form, &$form_state, $form_id) {
   $message = 'I want to leave my husband';
-  $code = stdClass();
-  $code->label = 'Eviction';
-  legalaid_sms_content_find_match_on_taxonomy($code);
+  $code['label'] = 'Eviction';
+  $code_new = object($code);
+  legalaid_sms_content_find_match_on_taxonomy($code_new);
 
 
 
@@ -59,6 +59,7 @@ function legalaid_sms_content_prepare_content($node) {
 
 
 function legalaid_sms_content_find_match_on_taxonomy($code) {
+  dpm($code);
   $term = taxonomy_get_term_by_name($code->label);
   dpm($term);
   $tid = $term->tid;
