@@ -22,7 +22,7 @@ function legalaid_sms_twilio_sms_incoming($sms, $options) {
   }
   else {
     watchdog('SMS','No match',array(),WATCHDOG_NOTICE);
-	$houston_output = houston_ai_classify(null, $message, null)
+	$houston_output = houston_ai_classify(null, $message, null);
 	$code = $houston_output->code;
 	$probability = (int) 100 * $houston_output->probability;
 	if($probability >= 75){
@@ -35,7 +35,12 @@ function legalaid_sms_twilio_sms_incoming($sms, $options) {
 		}
 	}
 	else {
-		$message = "";
+		$message = "Select which option you need help with : \n";
+		$message .= "1) " . $code->label;
+		foreach ($houston_output->otherProbabilities as index => $code) {
+			$message .= " /n ". index + 2 .") ". $code->code;
+		}
+		$message .= "\n or reply \"Something else\" for more options.";
 	}
 	twilio_send($number, $message);
   }
