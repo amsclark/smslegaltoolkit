@@ -8,14 +8,15 @@
 /**
  * Implements hook_twilio_sms_incoming().
  */
-function legalaid_sms_twilio_sms_incoming($sms, $options) {
+function legalaid_sms_twilio_sms_incoming($sms, $options = NULL) {
   $number = $sms['number'];
   $number_twilio = $sms['number_twilio'];
   $message = strtolower($sms['message']);
   if (module_exists('houston_ai')) {
-    $problem = houston_ai_classify('',$message);
+    $problem = houston_ai_classify('',$message,'');
   }
- // twilio_send('6308811337','Hello');
+  $response = $message .' received';
+  twilio_send('6308811337',);
   // need to get problem code
   // need to formulate the result
   // need to respond to user
