@@ -33,9 +33,9 @@ function legalaid_sms_twilio_sms_incoming($sms, $options) {
 function legalaid_sms_find_match($message) {
   $query = new entityFieldQuery();
   $query->entityCondition('entity_type','node')
-    ->property_condition('status',NODE_PUBLISHED)
-    ->property_condition('type','sms_info')
-  ->field_condition('field_keyword','value',$message,'=')
+    ->propertyCondition('status',NODE_PUBLISHED)
+    ->propertyCondition('type','sms_info')
+  ->fieldCondition('field_keyword','value',$message,'=')
     ->addMetaData('account', user_load(1));
 
 $result = $query->execute();
@@ -47,5 +47,12 @@ if (isset($result['node'])) {
 return null;
 
 
+
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function legalaid_sms_form_alter(&$form, &$form_state, $form_id) {
 
 }
