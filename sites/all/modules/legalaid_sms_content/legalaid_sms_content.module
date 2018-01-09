@@ -4,11 +4,10 @@
  * Implements hook_form_alter().
  */
 function legalaid_sms_content_form_alter(&$form, &$form_state, $form_id) {
-  $message = 'I want to leave my husband';
+  $message = 'child';
   $code['label'] = 'Private Landlord/Tenant';
-  $code_new = (object) $code;
-  $nodes = legalaid_sms_content_find_match_on_taxonomy($code_new);
-  $msg = legalaid_sms_content_create_titles($nodes);
+  $houston_output = houston_ai_classify(null, $message, null);
+  dpm($houston_output);
 
 
 
