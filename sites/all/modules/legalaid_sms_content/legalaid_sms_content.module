@@ -6,7 +6,7 @@
 function legalaid_sms_content_form_alter(&$form, &$form_state, $form_id) {
   $message = 'I want to leave my husband';
   $code['label'] = 'Eviction';
-  $code_new = object($code);
+  $code_new = (object) $code;
   legalaid_sms_content_find_match_on_taxonomy($code_new);
 
 
