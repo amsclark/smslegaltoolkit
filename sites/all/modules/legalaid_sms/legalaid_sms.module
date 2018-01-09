@@ -9,7 +9,7 @@
  * Implements hook_twilio_sms_incoming().
  */
 function legalaid_sms_twilio_sms_incoming($sms, $options) {
-  watchdog('SMS','An sms was received',array(),WATCHDOG_NOTICE);
+  watchdog('SMS','An sms was received from @num',array($sms['number']),WATCHDOG_NOTICE);
   $number = $sms['number'];
   $number_twilio = $sms['number_twilio'];
   $message = strtolower($sms['message']);
