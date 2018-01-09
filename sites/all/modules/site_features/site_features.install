@@ -1,7 +1,7 @@
 <?php
 
 function site_features_update_7001() {
-  $enable_list = array('houston_ai', 'legalaid_sms', 'twilio');
+  $enable_list = array('houston_ai', 'legalaid_sms', 'twilio', 'legalaid_sms_content');
   if (!module_enable($enable_list, true)) {
     throw new DrupalUpdateException('One of the following modules did not enable: ' . implode(',', $enable_list));
   }
