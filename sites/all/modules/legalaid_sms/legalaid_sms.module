@@ -18,7 +18,7 @@ function legalaid_sms_twilio_sms_incoming($sms, $options) {
   $exact_match = legalaid_sms_find_match($message);
   if (!empty($exact_match)) {
     watchdog('SMS','We found a match',array(),WATCHDOG_NOTICE);
-	$response = legalaid_sms_content_prepare_content($exact_match);
+	$response = legalaid_sms_content_prepare_content(current($exact_match));
   }
   else {
     watchdog('SMS','No match',array(),WATCHDOG_NOTICE);
