@@ -45,7 +45,7 @@ function legalaid_sms_prepare_content($node) {
 
   $message .= legalaid_sms_strip_html($node->body['und'][0]['safe_value']);
   if(!empty($message)) {
-    twilio_send(630881337,$message);
+    twilio_send(6308811337,$message);
   }
   return $message;
 }
