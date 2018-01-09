@@ -13,3 +13,7 @@ Twilio 7.x-1.11 (Must be installed using instructions here: https://www.drupal.o
 Libraries 7.x-2.3
 
 Features 7.x-2.10
+
+You will need a Twilio API Key.
+
+You will need a Houston.ai API key. https://houston.ai/about.html
