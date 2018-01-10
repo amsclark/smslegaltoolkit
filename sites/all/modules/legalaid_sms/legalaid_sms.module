@@ -1,0 +1,92 @@
+<?php
+
+
+/**
+ * Implements hook_form().
+ */
+
+/**
+ * Implements hook_twilio_sms_incoming().
+ */
+function legalaid_sms_twilio_sms_incoming($sms, $options) {
+  $number = $sms['number'];
+  $number_twilio = $sms['number_twilio'];
+  $message = strtolower($sms['message']);
+  $response = "";
+  watchdog('SMS','An sms was received from @num',array('@num' => $number),WATCHDOG_NOTICE);
+
+  $exact_match = legalaid_sms_find_match($message);
+  if (!empty($exact_match)) {
+    watchdog('SMS','We found a match',array(),WATCHDOG_NOTICE);
+	$response = legalaid_sms_content_prepare_content(current($exact_match));
+  }
+  else {
+    watchdog('SMS','No match',array(),WATCHDOG_NOTICE);
+	$houston_output = houston_ai_classify(null, $message, null);
+	$code = $houston_output->code;
+	$probability = (int) 100 * $houston_output->probability;
+	if($probability >= 75){
+		$nodes = legalaid_sms_content_find_match_on_taxonomy($code);
+ 		if(count($nodes) == 1){
+			$response = legalaid_sms_content_prepare_content(current($nodes));
+		}
+		else {
+			$response = legalaid_sms_content_create_titles($nodes);
+		}
+	}
+	else {
+		$response = 'Select which option you need help with :' ."\n";
+		$response .= "1) " . $code->label;
+		foreach ($houston_output->otherProbabilities as $index => $prob) {
+			$response .= " \n";
+      $response .=$index + 2 .') '. $prob->code->label;
+		}
+		$response .= "\n" .'or reply MORE for more options.';
+	}
+	if(empty($response)){
+		$response = "We're not sure how to help you. \n Call 1-800-123-4567 for additional assistance.";
+	}
+  }
+  watchdog('SMS','Response is @response',array('@response' => $response),WATCHDOG_NOTICE);
+  twilio_send($number, $response);
+}
+
+
+
+#function legalaid_sms_houston_parse($message, $number) {
+#	$houston_output = houston_ai_classify(null, $message, null);
+#	$code = $houston_output->code;
+#	$label = $code->label;
+#	dpm($houston_output);
+#	$probability = (int) 100 * $houston_output->probability;
+#	watchdog('SMS','Houston classification returned @label with a @prob likelihood',array('@label' => $label, '@prob' => $probability),WATCHDOG_NOTICE);
+#	twilio_send($number, "You seem to be having a problem with {$label}, {$probability} likelihood.");
+#}
+
+function legalaid_sms_find_match($message) {
+  $query = new entityFieldQuery();
+  $query->entityCondition('entity_type','node')
+    ->propertyCondition('status',NODE_PUBLISHED)
+    ->propertyCondition('type','sms_info')
+  ->fieldCondition('field_keyword','value',$message,'=')
+    ->addMetaData('account', user_load(1));
+
+$result = $query->execute();
+if (isset($result['node'])) {
+  $matching_items_nids = array_keys($result['node']);
+  $matching_items = entity_load('node', $matching_items_nids);
+  return $matching_items;
+}
+return null;
+
+
+
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function legalaid_sms_form_alter(&$form, &$form_state, $form_id) {
+
+}
+

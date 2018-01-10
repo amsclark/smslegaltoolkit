@@ -1,0 +1,5 @@
+name = Legal Aid SMS
+description = Integration the Twilio cloud communication service with Legal aid specific requirements
+core = 7.x
+package = Legal aid
+dependencies[] = twilio

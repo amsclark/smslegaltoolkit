@@ -1,0 +1,81 @@
+<?php
+
+/**
+ * Implements hook_form_alter().
+ */
+function legalaid_sms_content_form_alter(&$form, &$form_state, $form_id) {
+  $message = 'child';
+  $code['label'] = 'Private Landlord/Tenant';
+  $houston_output = houston_ai_classify(null, $message, null);
+  dpm($houston_output);
+
+
+
+}
+
+function legalaid_sms_content_create_titles($nodes) {
+
+  $message = t('Which article would you like?');
+  $ctr = 1;
+  foreach ($nodes as $node) {
+    $message .= " \n " .'Reply ' .$ctr .' for ' .$node->title;
+    $ctr++;
+  }
+  return $message;
+}
+
+function legalaid_sms_strip_html($text) {
+  $text = str_replace('[no-lexicon]','', $text);
+  $text = str_replace('[/no-lexicon]','', $text);
+  $text = str_replace('<a href="/node',' http://dev-hackathon-sms.pantheonsite.io/node',$text);
+  $text = str_replace('<a href="es/node',' http://dev-hackathon-sms.pantheonsite.io/es/node',$text);
+  $text = str_replace('<a href="',' ',$text);
+  $text = str_replace('">',' ',$text);
+  $text = str_replace('<p>'," \n ",$text);
+  $text = str_replace('<h3>'," \n ",$text);
+  $text = str_replace('<h4>'," \n ",$text);
+  $text = str_replace('<h5>'," \n ",$text);
+  $text = str_replace('&nbsp;'," ",$text);
+  $text = str_replace('<li>'," \n \n*",$text);
+  $text = str_replace('<ul>'," \n",$text);
+  $text = decode_entities($text);
+
+
+  $text = strip_tags($text);
+  return $text;
+}
+
+function legalaid_sms_content_prepare_content($node) {
+  $message = $node->title;
+  $message .= " \n*";
+
+  $message .= legalaid_sms_strip_html($node->body['und'][0]['safe_value']);
+  if(!empty($message)) {
+   // twilio_send(6308811337,$message);
+  }
+  return $message;
+}
+
+
+
+function legalaid_sms_content_find_match_on_taxonomy($code) {
+  $term = taxonomy_get_term_by_name($code->label);
+  if (!empty($term)) {
+    $tid = current($term)->tid;
+    $query = new entityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->propertyCondition('type', 'sms_info')
+      ->fieldCondition('field_sms_tags', 'tid', $tid, '=')
+      ->addMetaData('account', user_load(1));
+
+    $result = $query->execute();
+    if (isset($result['node'])) {
+      $matching_items_nids = array_keys($result['node']);
+      $matching_items = entity_load('node', $matching_items_nids);
+      return $matching_items;
+    }
+  }
+  return null;
+
+}
